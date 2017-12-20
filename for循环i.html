@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		li {
+			width: 50px;
+			height: 50px;
+			border: 1px solid red;
+		}
+		li:nth-of-type(1) {
+			transform: scale(1);
+		}
+		li:nth-of-type(2) {
+			transform: scale(2);
+		}
+		li:nth-of-type(3) {
+			transform: scale(3);
+		}
+	</style>
+</head>
+
+<body>
+	<li class="li"></li>
+	<li class="li"></li>
+	<li class="li"></li>
+	<script>
+		var lis = document.querySelectorAll('li')
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].onclick = function() {
+				console.log(lis[i])
+			}
+			console.log(getComputedStyle(lis[i]).transform)
+		}
+	</script>
+</body>
+</html>

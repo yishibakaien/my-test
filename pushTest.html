@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button class="btn checked" id="btn">dd</button>
+
+	<script>
+		var a = 'my  na m  e'.split(/\s+/).concat(['OO']).join(' ')
+		console.log(a)
+
+		function hasClass(el, className) {
+		    return el.className.indexOf(className) !== -1
+		  }
+	  function toggleClass(el, className) {
+	    if (hasClass(el, className)) {
+	      el.className = el.className.split(className).join(' ')
+	      return
+	    }
+	    var newClass = el.className.split(' ').concat([className]).join(' ')
+	    newClass.push(className)
+	    el.className = newClass.join(' ')
+	  }
+
+		var btn = document.getElementById('btn')
+		btn.onclick = function () {
+			toggleClass(this, 'btn')
+		}
+	</script>
+</body>
+</html>

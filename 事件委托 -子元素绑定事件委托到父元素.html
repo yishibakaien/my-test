@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul {
+            padding: 10px;
+            border: 1px dashed #666;
+            width: 300px;
+        }
+        li {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #999;
+            list-style: none;
+        }
+        ul >:first-child {
+            margin-top: 0;
+        }
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <ul id="list">
+        <li>0</li>
+        <li data-src="www.baidu.com">
+            <span>span 1</span>
+        </li>
+        <li data-src="www.google.com">
+            <p><span>p>span 2</span></p>
+        </li>
+        <li>3</li>
+    </ul>
+    <script>
+        var list = document.querySelector('#list')
+
+        list.addEventListener('click', function(e) {
+            var evt = e || window.event
+            var target = evt.target
+            while (target.tagName.toLowerCase() !== 'li') {
+                console.log(target.tagName, evt.eventPhase)
+                target = target.parentNode
+            }
+            console.log(target)
+        })
+
+        // 代理函数
+        function delegate(target, fn) {
+            return function() {
+                return fn.apply(target, arguments)
+            }
+        }
+
+        function A() {
+            let name = 'xiaohua'
+            return {
+                getName() {
+                    return name
+                },
+                setName(val) {
+                    name = val
+                }
+            }
+        }
+
+        var a = new A()
+        console.log(a.getName())
+        var deleSetName = delegate(a, a.setName)
+        deleSetName('dahua')
+        console.log(a.getName())
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">click me</button>
+	<script>
+		var $$ = function(str) {
+			return document.querySelector(str)
+		}
+
+		var $btn = $$('#btn')
+		$btn.onclick = function(event) {
+			console.log('i am onclick bingding event')
+			
+		}
+		$btn.addEventListener('click', function() {
+			console.log('i am addEventListener 0')
+			// ======
+			// 关键性代码 阻止事件冒泡的同时 该元素绑定的后序相同类型事件的监听函数的执行也将被阻止.
+			console.info('阻止事件冒泡的同时该元素绑定的后序相同类型事件的监听函数的执行也将被阻止')
+			event.stopImmediatePropagation()
+		})
+		$btn.addEventListener('click', function() {
+			console.log('i am addEventListener 1')
+		})
+	</script>
+</body>
+</html>

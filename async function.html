@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function asyncPrint(str, times) {
+            await timeout(times)
+            console.log(`${str} i am waitting ${times / 1000}s`)
+            return str
+        }
+
+        function timeout(time) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (Math.round(Math.random()) > 0.5) {
+                        resolve('sucess')
+                    } else {
+                        reject('fail')
+                    }
+                }, time)
+            })
+        }
+
+        var a = asyncPrint('hello', 1000)
+
+        a.then(res => {
+            console.log('我是then', res)
+        })
+        .catch(res => {
+            console.log('我是catch', res)
+        })
+
+    </script>
+</body>
+</html>

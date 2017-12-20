@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		function observer(val, cb) {
+			Object.keys(value).forEach(key => defineReactive(val, key, val[key], cb))
+		}
+
+		function defineReactive(obj, key, val, cb) {
+			Object.defineProperty(obj, key, {
+				enumerable: true,
+				configurable: true,
+				get: () => {},
+				set: newVal => {
+					cb()
+				}
+			})
+		}
+
+		class Vue {
+			construtor(options) {
+				this._data = options.data
+				observer(this._data, options.render)
+			}
+		}
+		let app = new Vue({
+			el: '#app',
+			data: {
+				text: 'text1',
+				text2: 'text2'
+			},
+			render() {
+				console.log('render...')
+			}
+		})
+	</script>
+
+</body>
+</html>

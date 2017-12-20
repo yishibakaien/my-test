@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		function asyncRandom(time = 500) {
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					var rn = Math.round(Math.random())
+					console.log(rn);
+					if (rn) {
+						resolve('大')
+					} else {
+						reject('小')
+					}
+				})
+			})
+		}
+		asyncRandom(100).then(data => {
+			// 1
+			console.log(data)
+			return 'success1'
+		}).then(data => {
+			// 2
+			console.log(data)
+			return 'success2'
+		}).then(data => {
+			// 3.1
+			console.log(data)
+		}).catch(data => {
+			// 3.2 
+			console.log('in fail case?', data)
+			return 'fail1'
+		}).then(data => {
+			// 值永远只传到这一步，当成功进入 reject 时 data 为 fail1
+			// 进入 resolve 时 data 为 undefined 因为 3.1 中没有返回值
+			console.log('finally success', data);
+		}).catch(data => {
+			// 不会走到这一步
+			console.log('finally fail', data)
+		})
+	</script>
+</body>
+</html>

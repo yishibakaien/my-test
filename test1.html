@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul {
+			border: 1px solid red;
+		}
+		li {
+			margin: 10px;
+			padding: 5px;
+			border: 1px solid blue;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li name="xiaoming">
+			<span>dianji</span>
+		</li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script>
+		window.addEventListener('click', function() {
+			console.log(1);
+		});
+		document.addEventListener('click', function() {
+			console.log(2);
+		});
+		function $$(str) {
+			return document.querySelector(str);
+		}
+		var ul = $$('ul');
+		ul.addEventListener('click', function(e) {
+			console.log(e, e.target);
+			var target = e.target;
+			while (target !== ul) {
+				if (target.tagName.toLowerCase() === 'li') {
+					console.log(target.getAttribute('name'));
+					break;
+				}
+				target = target.parentNode;
+			}
+		});
+		history.pushState(
+		{
+			title: '页面标题'
+		}, 
+		'页面标题1',
+		location.href + '/likethis'
+		);
+	</script>
+</body>
+</html>
