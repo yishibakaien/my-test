@@ -4,22 +4,355 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<style>
-		div {
-			height: 100px;
-			width: 50px;
-			background: #dfdfdf;
-			writing-mode: tb-rl;
-			text-align: center;
-			word-break: break-all;
-			overflow: hidden;
-			text-overflow:ellipsis;
-			white-space: nowrap;
+	.cqw-btn {
+	display: block;
+	/*width: 100%;*/
+	height: 42px;
+	line-height: 42px;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+}
+.cqw-btn.inline {
+	display: inline-block;
+	padding: 0 30px;
+}
+.cqw-btn-white {
+	background: #fff;
+	border:1px solid #d5d5d5;
+	color: #333;
+	box-sizing: border-box;
+
+}
+.cqw-btn-blue {
+	background: #10a0eb;
+	cursor: pointer;
+}
+.cqw-btn-green {
+	background: #25c55f;
+	cursor: not-allowed;
+}
+.cqw-btn-disabled {
+	background: #d5d5d5;
+	cursor: not-allowed;
+}
+.cqw-btn-disabled:hover {
+	color: #fff;
+}
+.cqw-btn-blue:hover {
+	opacity: 0.8;
+	color: #fff;
+}
+		* {
+			margin: 0;
+			padding: 0;
 		}
-	</style>
+		ul > li {
+			list-style: none;
+		}
+		.clearfix {
+
+		}
+		.clearfix:after {
+			content: ' ';
+			display: block;
+			clear: both;
+			height: 0;
+			line-height: 0;
+			font-size: 0;
+			visibility: hidden;
+		}
+.coupon-mask {
+	/*display: none;*/
+	position:fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0,0,0,0.4);
+}
+.coupon-container {
+	width: 500px;
+	background: #fff;
+	border-radius: 5px;
+	box-sizing: border-box;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.coupon-container .title {
+	font-size: 16px;
+	color: #333;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	position: relative;
+}
+.coupon-container .title span {
+	display: inline-block;
+}
+.coupon-container .title .close {
+	position: absolute;
+	right: 24px;
+	color: #999;
+	font-size: 20px;
+	cursor: pointer;
+}
+.coupon-content {
+	padding: 0 35px;
+}
+.coupon-content .sub-title {
+	height: 40px;
+	line-height: 40px;
+}
+.coupon-content .coupon-list {
+}
+
+.coupon-content .coupon-item {
+	width: 195px;
+	height: 100px;
+	box-sizing: border-box;
+	color: #fff;
+	border-radius: 4px;
+	position: relative;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+.coupon-content .coupon-item.hongbao {
+	background: #ea4e4e;
+}
+.coupon-content .coupon-item.manjian {
+	background: #f4c041;
+}
+.coupon-content .coupon-item.jiaxi {
+	background: #10a0eb;
+}
+.coupon-content .coupon-item:nth-of-type(odd) {
+	float: left;
+}
+.coupon-content .coupon-item:nth-of-type(even) {
+	float: right;
+}
+
+
+
+.coupon-content .coupon-item .check-icon {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	left: -25px;
+	top: -25px;
+	transform: rotate(-45deg);
+	display: none;
+}
+.coupon-item.active .check-icon {
+	display: block;
+}
+.hongbao .check-icon {
+	background: #B01818;
+}
+.jiaxi .check-icon {
+	background: #197FB4;
+}
+.manjian .check-icon {
+	background: #DAA602;
+}
+
+.coupon-content .coupon-item .check-icon .arrow {
+	position: absolute;
+	width: 12px;
+	height: 6px;
+	border-bottom: 2px solid #fff;
+	border-left: 2px solid #fff;
+	bottom: 7px;
+	right: 17px;
+	border-radius: 2px;
+}
+
+.text-ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.coupon-content .coupon-item .left-message {
+
+	box-sizing: border-box;
+	text-align: center;
+	
+	width: 152px;
+	height: 100%;
+	float: left;
+	padding: 8px;
+}
+.coupon-content .coupon-item .left-message .money {
+	font-size: 28px;
+	line-height: 28px;
+	margin-top: 10px;
+}
+.coupon-content .coupon-item .left-message .effect {
+	font-size: 10px;
+	line-height: 28px;
+}
+.coupon-content .coupon-item .left-message .unable-date {
+	font-size: 10px;
+}
+.hongbao .unable-date {
+	color: #b01818;
+}
+.manjian .unable-date {
+	color: #BE9000;
+}
+.jiaxi .unable-date {
+	color: #237098;
+}
+.coupon-content .coupon-item .right-message {
+	width: 43px;
+	box-sizing: border-box;
+	position: relative;
+	height: 100%;
+	float: right;
+	writing-mode: tb-rl;
+	text-align: center;
+	word-break: break-all;
+	line-height: 43px;
+	letter-spacing: 5px;
+	border-left: 2px dashed #fff;
+}
+.right-message:before {
+	content: ' ';
+	color: #fff;
+	width: 16px;
+	height: 16px;
+	border-radius: 16px;
+	background: #fff;
+	position: absolute;
+	top: -8px;
+	left: -9px;
+}
+.right-message:after {
+	content: ' ';
+	color: #fff;
+	width: 16px;
+	height: 16px;
+	border-radius: 16px;
+	background: #fff;
+	position: absolute;
+	bottom: -8px;
+	left: -9px;
+}
+.coupon-footer {
+
+}
+.coupon-footer a {
+	float: right;
+	margin-bottom: 20px;
+}
+.coupon-footer .cqw-btn-blue {
+	margin-right: 30px;
+}
+.coupon-footer .cqw-btn-white {
+	margin-right: 10px;
+}
+
+
+</style>
 </head>
 <body>
-	<div>
-		<p>大家好dddssss</p>
+<div id="couponMask" class="coupon-mask">
+	<div id="couponContainer" class="coupon-container" >
+		<p class="title clearfix">
+			<span>选择奖励</span>
+			<span class="close">&times;</span>
+		</p>
+		<div class="coupon-content">
+			<p class="sub-title">已选择</p>
+			<ul class="coupon-list clearfix">
+				<!-- <li class="coupon-item clearfix hongbao">
+					<div class="check-icon">
+						<div class="arrow"></div>
+					</div>
+					<div class="left-message">
+						<div class="money text-ellipsis">￥8888.00</div>
+						<div class="effect text-ellipsis">可抵扣投资金额0.1%</div>
+						<div class="unable-date text-ellipsis">2017-10-30过期</div>
+					</div>
+					<div class="right-message">
+						红包
+					</div>
+				</li> -->
+			</ul>
+			<p class="sub-title">可选</p>
+			<ul class="coupon-list clearfix">
+				<li class="coupon-item clearfix manjian">
+					<div class="check-icon">
+						<div class="arrow"></div>
+					</div>
+					<div class="left-message">
+						<div class="money">￥8888.00</div>
+						<div class="effect">可抵扣投资金额0.1%</div>
+						<div class="unable-date">2017-10-30过期</div>
+					</div>
+					<div class="right-message">
+						满减券
+					</div>
+				</li>
+				<li class="coupon-item clearfix jiaxi">
+					<div class="check-icon">
+						<div class="arrow"></div>
+					</div>
+					<div class="left-message jiaxi">
+						<div class="money">￥8888.00</div>
+						<div class="effect">可抵扣投资金额0.1%</div>
+						<div class="unable-date">2017-10-30过期</div>
+					</div>
+					<div class="right-message">
+						加息券
+					</div>
+				</li>
+				<li class="coupon-item clearfix hongbao">
+					<div class="check-icon">
+						<div class="arrow"></div>
+					</div>
+					<div class="left-message">
+						<div class="money">￥8888.00</div>
+						<div class="effect">可抵扣投资金额0.1%</div>
+						<div class="unable-date">2017-10-30过期</div>
+					</div>
+					<div class="right-message">
+						红包
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="coupon-footer">
+			<a class="cqw-btn cqw-btn-blue inline">确定</a>
+			<a class="cqw-btn cqw-btn-white inline">取消</a>
+		</div>
 	</div>
+</div>
+<script>
+	var uls = document.querySelectorAll('ul')
+	var ul1 = uls[0]
+	var ul2 = uls[1]
+	var cloneNode = ''
+	var forEach = Array.prototype.forEach;
+	var lis = ul2.getElementsByTagName('li')
+	
+	forEach.call(lis, function(item, index) {
+		item.onclick = function() {
+			forEach.call(lis, function(it) {
+				it.className = it.className.split('active').join(' ')
+			})
+			this.className += ' active'
+			cloneNode = this.cloneNode(true)
+			ul1.innerHTML = ''
+			ul1.appendChild(cloneNode)
+		}
+	})
+
+
+</script>
 </body>
 </html>
