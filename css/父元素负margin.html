@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		ul > li {
+			list-style: none;
+		} 
+		.clearfix::after {
+			content: ' ';
+			display: block;
+			height: 0;
+			visibility: hidden;
+			clear: both;
+		}
+		ul {
+			width: 630px;
+			margin: 10px 0 0 -10px;
+			background: #dfdfdf;
+		}
+		li {
+			box-sizing: border-box;
+			width: 200px;
+			height: 200px;
+			float: left;
+			margin: 0 0 10px 10px;
+			border: 1px dashed red;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul class="list-wrapper clearfix">
+			<li class="list"></li>
+			<li class="list"></li>
+			<li class="list"></li>
+			<li class="list"></li>
+			<li class="list"></li>
+			<li class="list"></li>
+			<li class="list"></li>
+		</ul>
+	</div>
+</body>
+</html>
