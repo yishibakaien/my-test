@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<button id="button1">点击我addEventListener</button>
+	<button id="button2">点击我onclick</button>
+
+	<p>经过测试得出结论 addEventListener 添加点击事件会多次添加，而通过onclick绑定点击事件则后面绑定的事件会覆盖前者</p>
+	<script>
+		var btn = document.querySelector('#button1')
+		var btn2 = document.querySelector('#button2')
+		btn.addEventListener('click', function() {
+			console.log(1)
+		})
+		btn.addEventListener('click', function() {
+			console.log(2)
+		})
+		btn2.onclick = function() {
+			console.log(1)
+		}
+		btn2.onclick = function() {
+			console.log(2)
+		}
+	</script>
+</body>
+</html>
