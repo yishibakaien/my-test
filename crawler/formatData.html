@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="" id="ipt" cols="30" rows="10"></textarea>
+    <button id="btn">点击显示</button>
+    <div id="content"></div>
+    <script>
+    
+
+    var toString = Object.prototype.toString
+    var Type = {}
+    var types = ['Array', 'String', 'Object', 'Number']
+
+    for (let item of types) {
+        Type['is' + item] = function(prj) {
+            return toString.call(prj) === '[object ' + item + ']'
+        }
+    }
+
+    function formater(source) {
+
+        if (Type.isObject(source) || Type.isArray(source)) {
+            source = JSON.stringify(source) 
+        }
+
+        if (Type.isString(source)) {
+
+            var t = '{"t": "' + source + '"}'
+
+            return JSON.parse(t).t
+
+            // var reg = /\\u[a-f0-9]{4}/ig
+            // source = source.replace(reg, function(match) {
+            //     var a = decodeURIComponent(match)
+            //     console.log(match, a)
+            //     return decodeURIComponent(match)
+            // })
+            // return source
+        }
+    }
+    // json to html
+    function j2h(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        var result = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            var cls = 'darkorange';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'red';
+                } else {
+                    cls = 'green';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'blue';
+            } else if (/null/.test(match)) {
+                cls = 'magenta';
+            }
+            return '<span style="color:' + cls + '">' + match.replace(/\\n/g, '<br>') + '</span>';
+        });
+        return `<pre style="outline: 1px solid #ccc; padding: 5px; margin: 5px;">${result}</pre>`
+    }
+
+    var ipt = document.getElementById('ipt')
+    var btn = document.getElementById('btn')
+    var content = document.getElementById('content')
+    btn.onclick = function() {
+        var val = ipt.value
+
+        content.innerText = j2h(val)
+    }
+    
+    </script>
+</body>
+
+</html>
