@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"document.querySelector('div').style.border = '1px solid red'\r\nconsole.log('Hi')"},"hash":"470140acbac962f7aa03770362f1223e"}

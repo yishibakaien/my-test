@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .clearfix::after {
+            content: ' ';
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+        .bg {
+            height: 100px;
+            background-image: url('./images/11.png') no-repeat;
+        }
+        ul > li {
+            list-style: none;
+        }
+        .img-container {
+            box-sizing: border-box;
+            width: 100%;
+            background: #ddd;
+            display: flex;
+        }
+        
+        .img-item {
+            /*float: left;*/
+            flex: 1;
+            overflow: hidden;
+        }
+        .img-item img {
+            vertical-align: bottom;
+            max-width: 100%;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div>1234</div>
+    <div>
+        <img src="./images/1.png" alt="">
+    </div>
+    <div class="bg"></div>
+    <ul class="clearfix img-container">
+        <li class="img-item">
+            <img src="./images/1.jpg" alt="">
+        </li>
+        <li class="img-item">
+            <img src="./images/2.jpg" alt="">
+        </li>
+        <li class="img-item">
+            <img src="./images/3.jpg" alt="">
+        </li>
+    </ul>
+    <script src="./js/index.js"></script>
+</body>
+</html>
