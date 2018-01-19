@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="d1">123</div>
+    <div id="d2">456</div>
+    <script>
+        var d1 = document.getElementById('d1')
+        var fc = d1.firstChild
+        var type = Object.prototype.toString
+        console.log(fc, type.call(fc))
+
+        fc.remove()
+        var ob = {}
+        for (var key in fc) {
+            ob[key] = fc[key]
+        }
+
+        // var d2 = document.getElementById('d2').firstChild
+        // fc.appendChild(d2)
+        console.log(ob)
+
+    </script>
+</body>
+</html>
