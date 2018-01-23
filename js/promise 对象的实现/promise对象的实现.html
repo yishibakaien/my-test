@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Promise 对象的实现</title>
+</head>
+
+<body>
+    <script>
+        var MyPromise = function(executor) {
+            // Promise 对象的状态
+            this._state = null
+            // 用于校验传入的参数是自己还是其它的 Promise 对象
+            this._delegating = false
+
+            // 用于保存回调信息
+            this.defferreds = []
+
+            try {  
+                executor((value) => {  
+                    if (!this._delegating) this._resolve(value)  
+                }, (reason) => {  
+                    if (!this._delegating) this._reject(reason)  
+                });  
+            } catch (e) {  
+                if (!this._delegating) this._reject(e)  
+            }  
+        }
+        // 
+        MyPromise.prototype._resolve = function(value) {
+            try {
+                
+                if (this._state !== null) return
+
+                // 校验传入的参数是否是自己
+                if (value === this) throw new TypeError('A promise can not be resolve with itself.')
+                
+                // 传入的参数是其它 Promise
+                if (value && (typeof value === 'object' || typeof value === 'function') && typeof (value.then === "function") {  
+                    this._delegating = true
+                    value.then(this._resolve, this._reject)
+                    return
+                } 
+
+                this._state = true
+                this._value = value as T
+
+            } catch (e) {
+
+            }
+        }
+
+        MyPromise.prototype._reject = function(reason) {
+            if (this._state !== null) return
+            this._state = false
+            this.value = reason
+
+            // ToDo: 唤起所有回调
+        }
+
+        MyPromise.prototype._handle = function(defferred) {
+            if (this._state === null) {
+                this._defferreds.push(defferred)
+                return
+            }
+
+            setTimeout(() => {
+                // ToDo: 结束后执行的回调
+                var cb = this._state ? defferred.onfullfiled : defferred.onrejected
+                if (cb === null) {
+                    (this._state ? defferred.resolve : defferred.reject)(this._value as any)
+                    return
+                }
+                var ret
+                try {
+                    ret = cb(this._value) as any
+                } catch (e) {
+                    defferred.reject(e)
+                    return
+                }
+
+                // 成功执行
+                defferred.resolve(ret)
+            }, 0)
+        }
+
+        MyPromise.prototype.then = function(onfulfilled, onrejected) {
+            return MyPromise(function(resolve, reject) {
+                this._handle({
+                    onFulfilled: onfulfilled,
+                    onRejected: onrejected,
+                    resolve: resolve,
+                    reject: reject
+                })
+            })
+        }
+
+        MyPromise.prototype._finale = function() {
+            for (var i = 0, len = this._defferreds.length; i < len; i++) {
+                this._handle(this._defferreds[i])
+            }
+            this._defferreds.length = 0
+        }
+        MyPromise.prototype.catch = function(onrejected) {
+            return this.then(null, onrejected)
+        }
+
+    </script>
+</body>
+
+</html>
