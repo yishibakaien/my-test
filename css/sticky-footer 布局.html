@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sticky-footer</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .wrapper {
+        height: 100vh;
+        background: #f2f2f2;
+    }
+    .sticky-footer-content {
+        height: 100%;
+        overflow: auto;
+        /*background: yellow;*/
+    }
+    .content {
+        padding-bottom: 64px;
+    }
+    .sticky-footer-footer {
+        margin-top: -64px;
+        border: 1px solid blue;
+        clear: both;
+        line-height: 64px;
+    }
+    p {
+        height: 150px;
+        border: 1px solid #888;
+    }
+  </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sticky-footer-content">
+            <div class="content">
+                <button id="add">add</button>
+                <button id="dec">dec</button>
+                我是内容区域我可能很长
+            </div>
+        </div>
+        <div class="sticky-footer-footer">我是底部</div>
+    </div>
+
+    <script>
+        var add = document.querySelector('#add')
+        var dec = document.querySelector('#dec')
+        var content = document.querySelector('.content')
+        var p = document.createElement('p')
+        p.innerHTML = '文字'
+        add.onclick = function() {
+            content.appendChild(p.cloneNode(true))
+        }
+        dec.onclick = function() {
+            content.removeChild(content.lastChild)
+        }
+    </script>
+</body>
+</html>
