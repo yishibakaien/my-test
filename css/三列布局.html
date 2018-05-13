@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>三列布局</title>
+    <style>
+    .container {
+        width: 960px;
+        margin: 0 auto;
+    }
+    
+    .rightWrap {
+        width: 100%;
+        float: left;
+        background: red;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .contentWrap {
+        float: left;
+        background: yellow;
+        width: 100%;
+        position: relative;
+        right: 320px;
+        /*此值等于rightSidebar的宽度*/
+    }
+    
+    .leftWrap {
+        width: 100%;
+        background: blue;
+        float: left;
+        position: relative;
+        right: 420px;
+        /*此值等于Content的宽度*/
+    }
+    
+    #left {
+        float: left;
+        width: 220px;
+        overflow: hidden;
+        position: relative;
+        left: 740px;
+    }
+    
+    #content {
+        float: left;
+        width: 420px;
+        overflow: hidden;
+        position: relative;
+        left: 740px;
+    }
+    
+    #right {
+        float: left;
+        overflow: hidden;
+        width: 320px;
+        background: #888;
+        position: relative;
+        left: 740px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="rightWrap">
+            <div class="contentWrap">
+                <div class="leftWrap">
+                    <div class="aside column leftSidebar" id="left">
+                      <p style="height: 300px;width: 100%;">
+                        left
+                      </p>
+                    </div>
+                    <div id="content" class="column section">
+                      <p style="height: 400px; width: 100%">
+                        center
+                      </p>
+                    </div>
+                    <div class="aside rightSidebat column" id="right">
+                      <p style="width: 50%; height: 200px;">
+                        right
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
