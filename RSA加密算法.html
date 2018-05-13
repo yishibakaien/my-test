@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSA加密算法</title>
+</head>
+<body>
+  <script>
+
+    const m = 4 
+    console.log('明文 m', m)
+
+    const p = 5
+    const q = 4
+
+    const n = p * q // n
+    console.log('n = p * q ', n)
+
+    const f = (p - 1) * (q - 1)
+    console.log('f = (p - 1) * (q - 1) ', f)
+
+    let e = 1 // 公钥 e, 且 1 < e < f
+
+    const eArr = []
+    while (e < f) {
+      if (calc(e, f)) {
+        eArr.push(e)
+      }
+      e++
+    }
+    console.log(eArr)
+    e = eArr[Math.floor(Math.random() * eArr.length)] // 随机取一个 e 值
+    console.log('公钥 e ', e)
+
+    let d = 0 // 私钥 d
+    while ((e * d) % f !== 1) {
+      d++
+    }
+    console.log('私钥 d ', d);
+
+    const c = Math.pow(m, e) % n // 加密出来的明文 
+    console.log('加密幂 ', Math.pow(m, e))
+    console.log('加密出来的明文 c ', c)
+
+    const a = Math.pow(c, d) % n // 解密出来的结果
+    console.log('解密幂 ', Math.pow(c, d))
+    console.log('解密出来的结果 ' + a + ' === m ?', a === m ? '正确' : '错误')
+
+    /**
+     * 判断两个数是否互质，辗转相除
+     * @param  {[number]} x 
+     * @param  {[number]} y 
+     * @return {[boolean]} 
+     */
+    function calc(x, y) {
+      if (x < y) {
+        let tmp = x
+        x = y
+        y = tmp
+      }
+      let c
+      while ((c = x % y) !== 0) {
+        x = y
+        y = c
+      }
+      return y === 1
+    }
+  </script>
+</body>
+</html>
