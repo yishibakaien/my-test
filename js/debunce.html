@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+</head>
+<body>
+  <input type="" name="" id="input">
+
+  <script type="text/javascript">
+
+    var input = $('input');
+    input.addEventListener('keyup', function() {
+      dubounceAsyncLog(this.value);
+    }, false);
+
+
+    function asyncLog(data) {
+      setTimeout(() => {
+        console.log(data);
+      }, 300);
+    }
+
+    function $(id) {
+      return document.querySelector(id);
+    }
+
+    var dubounceAsyncLog = debounce(asyncLog, 300);
+
+    function debounce(fn, delay) {
+      var timer = null;
+      return function() {
+        // var _this = this;
+        var args = arguments;
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, args);
+        }, delay);
+      };
+    }
+
+
+  </script>
+</body>
+</html>
